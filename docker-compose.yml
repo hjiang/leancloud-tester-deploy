@@ -1,0 +1,27 @@
+version: "3"
+services:
+  web:
+    image: kmldqj/leancloud-tester-webapi:latest
+    ports:
+      - "80:4000"
+    networks:
+      - defaultnet
+  storage-tester:
+    image: kmldqj/leancloud-tester:latest
+    environment:
+      - TEST_NAME=storage
+      - PG_URI=postgres://postgres:insecure@postgres/leancloud_tests
+      - WAIT_FOR_PORT=postgres:5432
+      - APP_ID=${STORAGE_APP_ID}
+      - APP_KEY=${STORAGE_APP_KEY}
+    networks:
+      - defaultnet
+  postgres:
+    image: postgres:alpine
+    environment:
+      - POSTGRES_PASSWORD=insecure
+      - POSTGRES_DB=leancloud_tests
+    networks:
+      - defaultnet
+networks:
+  defaultnet:
