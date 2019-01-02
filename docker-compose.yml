@@ -4,6 +4,8 @@ services:
     image: kmldqj/leancloud-tester-webapi:latest
     ports:
       - "80:4000"
+    environment:
+      - PG_URI=postgres://postgres:insecure@postgres/leancloud_tests
     networks:
       - defaultnet
   storage-tester:
