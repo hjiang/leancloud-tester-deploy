@@ -3,8 +3,10 @@ services:
   web:
     image: kmldqj/leancloud-tester-webapi:latest
     ports:
-      - "80:4000"
+      - "443:4040"
     environment:
+      - SSL_KEY=${SSL_DIR}/privkey.pem
+      - SSL_CERT=${SSL_DIR}/fullchain.pem
       - PG_URI=postgres://postgres:insecure@postgres/leancloud_tests
     networks:
       - defaultnet
