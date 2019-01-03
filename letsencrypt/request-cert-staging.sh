@@ -1,11 +1,10 @@
 sudo docker run -it --rm \
 -v /docker-volumes/etc/letsencrypt:/etc/letsencrypt \
 -v /docker-volumes/var/lib/letsencrypt:/var/lib/letsencrypt \
--v $(pwd)/letsencrypt/letsencrypt-site:/data/letsencrypt \
 -v "/docker-volumes/var/log/letsencrypt:/var/log/letsencrypt" \
+-p 80:80 \
 certbot/certbot \
-certonly --webroot \
+certonly --standalone \
 --register-unsafely-without-email --agree-tos \
---webroot-path=/data/letsencrypt \
 --staging \
 -d test-us-west.leancloud.tk
