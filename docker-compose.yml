@@ -5,9 +5,12 @@ services:
     ports:
       - "443:4040"
     environment:
-      - SSL_KEY=${SSL_DIR}/privkey.pem
-      - SSL_CERT=${SSL_DIR}/fullchain.pem
+      - SSL_KEY=/ssl/privkey.pem
+      - SSL_CERT=/ssl/fullchain.pem
       - PG_URI=postgres://postgres:insecure@postgres/leancloud_tests
+    volumes:
+      - ${SSL_DIR}/fullchain.pem:/ssl/fullchain.pem
+      - ${SSL_DIR}/privkey.pem:/ssl/privkey.pem
     networks:
       - defaultnet
   storage-tester:
