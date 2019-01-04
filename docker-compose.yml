@@ -32,6 +32,8 @@ services:
     environment:
       - POSTGRES_PASSWORD=insecure
       - POSTGRES_DB=leancloud_tests
+    volumes:
+      - /docker-volumes/var/lib/postgresql/data/:/var/lib/postgresql/data/
     networks:
       - defaultnet
 networks:
