@@ -27,6 +27,18 @@ services:
       - APP_KEY=${STORAGE_APP_KEY}
     networks:
       - defaultnet
+  message-tester:
+    image: kmldqj/leancloud-tester:latest
+    depends_on:
+      - postgres
+    environment:
+      - TEST_NAME=message
+      - PG_URI=postgres://postgres:insecure@postgres/leancloud_tests
+      - WAIT_FOR_PORT=postgres:5432
+      - APP_ID=${STORAGE_APP_ID}
+      - APP_KEY=${STORAGE_APP_KEY}
+    networks:
+      - defaultnet
   postgres:
     image: postgres:alpine
     environment:
