@@ -1,3 +1,8 @@
+if [ -z "$DOMAIN" ]; then
+  echo "Please set DOMAIN"
+  exit 1
+fi
+
 sudo docker run -it --rm \
 -v /docker-volumes/etc/letsencrypt:/etc/letsencrypt \
 -v /docker-volumes/var/lib/letsencrypt:/var/lib/letsencrypt \
@@ -7,4 +12,4 @@ certbot/certbot \
 certonly --standalone \
 --register-unsafely-without-email --agree-tos \
 --staging \
--d test-us-west.leancloud.tk
+-d $DOMAIN
